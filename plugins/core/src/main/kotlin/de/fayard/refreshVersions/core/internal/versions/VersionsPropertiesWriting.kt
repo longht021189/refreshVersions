@@ -79,7 +79,9 @@ private inline fun VersionsPropertiesModel.Companion.update(
     versionsPropertiesFile: File = RefreshVersionsConfigHolder.versionsPropertiesFile,
     crossinline transform: (model: VersionsPropertiesModel) -> VersionsPropertiesModel
 ) {
-    require(versionsPropertiesFile.name == "versions.properties")
+    // allow to edit versionsPropertiesFile
+    // require(versionsPropertiesFile.name == "versions.properties")
+
     synchronized(versionsPropertiesFileLock) {
         val newModel = transform(VersionsPropertiesModel.readFrom(versionsPropertiesFile))
         newModel.writeTo(versionsPropertiesFile)
